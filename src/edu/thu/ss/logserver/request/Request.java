@@ -8,4 +8,6 @@ public abstract class Request {
 	public abstract boolean isRead();
 
 	public abstract boolean isWrite();
+	
+	public abstract int readType();
 }
