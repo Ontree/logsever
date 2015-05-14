@@ -11,4 +11,5 @@ public abstract class ReadRequest extends Request {
 	public boolean isWrite() {
 		return false;
 	}
+	
 }

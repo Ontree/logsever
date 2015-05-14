@@ -1,0 +1,6 @@
+read status
+read employee chenminghai
+read employee
+read time chenminghai 1
+read interval 2000 5678
+write 9 chenminghai 1 enter
