@@ -1,20 +1,40 @@
 package edu.thu.ss.logserver.processor;
 
+import java.io.File;
+import java.io.IOException;
+
+import edu.thu.ss.logserver.Global;
 import edu.thu.ss.logserver.Global.Type;
 import edu.thu.ss.logserver.request.Request;
 import edu.thu.ss.logserver.request.WriteRequest;
+import edu.thu.ss.logserver.request.util.LogFileReader;
+import edu.thu.ss.logserver.request.util.LogFileWriter;
 
 public class WriteProcessor extends ReadProcessor{
 	
 	WriteRequest request;
+	LogFileWriter logFileWriter;
 	
 	public WriteProcessor(Request request) {
 		super(request);
 		this.request = (WriteRequest)request;
+		File file = new File(Global.LOG_FILE_PATH);
+		try{
+			logFileWriter = new LogFileWriter(file);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 	
 	public void WriteLogItem(){
-		
+		logFileWriter.startWrite();
+		String OutputContent = "";
+		OutputContent += request.timestmp + ",";
+		OutputContent += request.name + ",";
+		OutputContent += request.roomId + ",";
+		OutputContent += (request.type == Type.Enter)?"Enter":"Leave";
+		logFileWriter.println(OutputContent);
+		logFileWriter.endWrite();
 	}
 	
 	@Override
