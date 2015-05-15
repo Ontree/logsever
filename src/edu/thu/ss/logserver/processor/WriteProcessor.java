@@ -24,6 +24,7 @@ public class WriteProcessor extends ReadProcessor{
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+		runWrite();
 	}
 	
 	public void WriteLogItem(){
@@ -37,8 +38,7 @@ public class WriteProcessor extends ReadProcessor{
 		logFileWriter.endWrite();
 	}
 	
-	@Override
-	public void run(){
+	public void runWrite(){
 		LogItem logItem;
 		LogItem lastEmployeeItem = null;
 		logFile.startRead();
@@ -68,5 +68,11 @@ public class WriteProcessor extends ReadProcessor{
 		}else{
 			System.out.printf("error: Illegal Leave or Enter");
 		}
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 }
