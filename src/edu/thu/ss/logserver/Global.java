@@ -15,6 +15,7 @@ public class Global {
 	public final static int INTERVAL = 2;
 	public final static int STATUS = 3;
 	public final static int TIME = 4;
+	public final static int ERROR = 5;
 	public static AtomicInteger ThreadCount = new AtomicInteger(0); 
 	public final static String REQUEST_FILE_NAME = "Requests.txt";
 	public static Lock outputLock = new ReentrantLock();

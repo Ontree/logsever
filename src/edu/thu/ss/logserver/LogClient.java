@@ -29,8 +29,10 @@ public class LogClient implements Runnable {
 				String[] requestSplit = null;
 				requestSplit = line.split(" ");
 				if (requestSplit[0].equals("write")){
+					Request request;
 					if (requestSplit.length != 5){
-						System.out.println("error");
+						request = new ErrorRequest();
+						queue.add(request);
 						line = br.readLine();
 						continue;
 					}
@@ -38,11 +40,12 @@ public class LogClient implements Runnable {
 					try{
 						TimeStamp = Long.valueOf(requestSplit[1]).longValue();
 					}catch (Exception e){
-						System.out.println("error");
+						request = new ErrorRequest();
+						queue.add(request);
 						line = br.readLine();
 						continue;
 					}
-					Request request;
+					
 					Type type = null;
 					if (requestSplit[4].equals("enter"))
 						type = Type.Enter;
@@ -56,15 +59,17 @@ public class LogClient implements Runnable {
 					request = new WriteRequest(TimeStamp, requestSplit[2], requestSplit[3], type);
 					queue.add(request);
 				}else if (requestSplit[0].equals("read")){
+					Request request;
 					if (requestSplit.length == 1){
-						System.out.println("error");
+						request = new ErrorRequest();
+						queue.add(request);
 						line = br.readLine();
 						continue;
 					}
-					Request request;
 					if (requestSplit[1].equals("employee")){
 						if (requestSplit.length != 3){
-							System.out.println("error");
+							request = new ErrorRequest();
+							queue.add(request);
 							line = br.readLine();
 							continue;
 						}
@@ -73,7 +78,8 @@ public class LogClient implements Runnable {
 						queue.add(request);
 					}else if (requestSplit[1].equals("interval")){
 						if (requestSplit.length != 4){
-							System.out.println("error");
+							request = new ErrorRequest();
+							queue.add(request);
 							line = br.readLine();
 							continue;
 						}
@@ -82,7 +88,8 @@ public class LogClient implements Runnable {
 							low = Long.valueOf(requestSplit[2]).longValue();
 							up = Long.valueOf(requestSplit[3]).longValue();
 						}catch (Exception e){
-							System.out.println("error");
+							request = new ErrorRequest();
+							queue.add(request);
 							line = br.readLine();
 							continue;
 						}
@@ -90,7 +97,8 @@ public class LogClient implements Runnable {
 						queue.add(request);
 					}else if (requestSplit[1].equals("status")){
 						if (requestSplit.length != 2){
-							System.out.println("error");
+							request = new ErrorRequest();
+							queue.add(request);
 							line = br.readLine();
 							continue;
 						}
@@ -98,7 +106,8 @@ public class LogClient implements Runnable {
 						queue.add(request);
 					}else if (requestSplit[1].equals("time")){
 						if (requestSplit.length != 4){
-							System.out.println("error");
+							request = new ErrorRequest();
+							queue.add(request);
 							line = br.readLine();
 							continue;
 						}
@@ -107,12 +116,14 @@ public class LogClient implements Runnable {
 						request = new ReadTimeRequest(EmployeeName, RoomId);
 						queue.add(request);
 					}else{
-						System.out.println("error");
+						request = new ErrorRequest();
+						queue.add(request);
 						line = br.readLine();
 						continue;
 					}
 				}else{
-					System.out.println("error");
+					Request request = new ErrorRequest();
+					queue.add(request);
 				}
 				line = br.readLine();
 			}

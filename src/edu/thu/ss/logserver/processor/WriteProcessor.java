@@ -8,10 +8,12 @@ import edu.thu.ss.logserver.Global.Type;
 import edu.thu.ss.logserver.request.Request;
 import edu.thu.ss.logserver.request.WriteRequest;
 import edu.thu.ss.logserver.request.util.LogFileWriter;
+import edu.thu.ss.logserver.request.util.ResponseUtil;
 
 public class WriteProcessor extends ReadProcessor{
 	
 	WriteRequest request;
+	String response = "";
 	LogFileWriter logFileWriter;
 	
 	public WriteProcessor(Request request) {
@@ -32,9 +34,12 @@ public class WriteProcessor extends ReadProcessor{
 		OutputContent += request.timestmp + ",";
 		OutputContent += request.name + ",";
 		OutputContent += request.roomId + ",";
-		OutputContent += (request.type == Type.Enter)?"Enter":"Leave";
+		OutputContent += (request.type == Type.Enter)?"enter":"leave";
 		logFileWriter.println(OutputContent);
 		logFileWriter.flush();
+		Global.outputLock.lock();
+        ResponseUtil.response(request.id, "write successfully");
+        Global.outputLock.unlock();
 		logFileWriter.endWrite();
 		logFileWriter.close();
 	}
@@ -51,12 +56,17 @@ public class WriteProcessor extends ReadProcessor{
 		if (lastEmployeeItem == null){
 			if (request.type == Type.Enter)
 				WriteLogItem();
-			else
-				System.out.printf("error: Illegal Leave");
+			else{
+				Global.outputLock.lock();
+				ResponseUtil.response(request.id, "error");
+				Global.outputLock.unlock();
+			}
 			return;
 		}
 		if (lastEmployeeItem.timestmp >= request.timestmp){
-			System.out.println("error: Illegal Timstamp");
+			Global.outputLock.lock();
+	        ResponseUtil.response(request.id, "error");
+	        Global.outputLock.unlock();
 			return;
 		}
 		if (lastEmployeeItem.type == Type.Enter 
@@ -67,7 +77,9 @@ public class WriteProcessor extends ReadProcessor{
 				&& request.type == Type.Enter ){
 			WriteLogItem();	
 		}else{
-			System.out.printf("error: Illegal Leave or Enter");
+			Global.outputLock.lock();
+	        ResponseUtil.response(request.id, "error");
+	        Global.outputLock.unlock();
 		}
 	}
 

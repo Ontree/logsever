@@ -9,6 +9,7 @@ import edu.thu.ss.logserver.processor.ReadStatusProcessor;
 import edu.thu.ss.logserver.processor.ReadTimeProcessor;
 import edu.thu.ss.logserver.processor.WriteProcessor;
 import edu.thu.ss.logserver.request.Request;
+import edu.thu.ss.logserver.request.util.ResponseUtil;
 
 public class LogServer {
 	private BlockingQueue<Request> queue;
@@ -38,6 +39,10 @@ public class LogServer {
 					case Global.TIME:
 						new Thread(new ReadTimeProcessor(request)).start();
 						break;
+					default:
+						Global.outputLock.lock();
+				        ResponseUtil.response(request.id, "error");
+				        Global.outputLock.unlock();
 					}
 				}else{ //writeRequest
 					while(Global.ThreadCount.get() != 0){
