@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 public class LogFileWriter extends PrintWriter {
 
 	public LogFileWriter(File file) throws IOException {
-		super(new BufferedWriter(new FileWriter(file)), true);
+		super(new FileWriter(file, true));
 	}
 
 	public void startWrite() {
