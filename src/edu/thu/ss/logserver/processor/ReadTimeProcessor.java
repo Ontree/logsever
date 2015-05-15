@@ -1,8 +1,10 @@
 package edu.thu.ss.logserver.processor;
 
 
+import edu.thu.ss.logserver.Global;
 import edu.thu.ss.logserver.request.ReadTimeRequest;
 import edu.thu.ss.logserver.request.Request;
+import edu.thu.ss.logserver.request.util.ResponseUtil;
 
 public class ReadTimeProcessor extends ReadProcessor {
 	ReadTimeRequest request;
@@ -16,7 +18,7 @@ public class ReadTimeProcessor extends ReadProcessor {
 		long enterTime = -1, leaveTime, totalTime = 0;
 		LogItem logItem;
 		
-		
+		logFile.startRead();
 		//read lines of logFile
         while ((logItem=readLine())!=null) { 
         	if (logItem.name.equals(request.name)
@@ -37,9 +39,14 @@ public class ReadTimeProcessor extends ReadProcessor {
         		}
         	}
         }
+        logFile.endRead();
+        Global.ThreadCount.decrementAndGet();
         
-        
-    	System.out.printf("%l\n", totalTime);
+        String response = "" + totalTime;
+        Global.outputLock.lock();
+        ResponseUtil.response(request.id, response);
+        Global.outputLock.unlock();
+    	
     		
 		
 	}

@@ -3,12 +3,14 @@ package edu.thu.ss.logserver.processor;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import edu.thu.ss.logserver.Global;
 import edu.thu.ss.logserver.request.Request;
 import edu.thu.ss.logserver.request.util.LogFileReader;
+import edu.thu.ss.logserver.request.util.ResponseUtil;
 
 public class ReadStatusProcessor extends ReadProcessor {
 	LogFileReader LogFile;
-	
+	Request request;
 	public class Status{
 		public String name;
 		public String roomId;
@@ -20,7 +22,8 @@ public class ReadStatusProcessor extends ReadProcessor {
 	
 	public ReadStatusProcessor(Request request) {
 		super(request);
-		LogFile = super.LogFile;
+		LogFile = super.logFile;
+		this.request = request;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -32,6 +35,7 @@ public class ReadStatusProcessor extends ReadProcessor {
 		Status statusItem;
 		int flag;
 		
+		logFile.startRead();
 		//read lines of logFile
         while ((logItem=readLine())!=null) { 
         	flag = 1;
@@ -53,14 +57,20 @@ public class ReadStatusProcessor extends ReadProcessor {
         		statusList.add(new Status(logItem.name, logItem.roomId));
         	}
         }
+        logFile.endRead();
+        Global.ThreadCount.decrementAndGet();
         
+        String response = "";
         iter = statusList.iterator();
     	while(iter.hasNext()){  
     		statusItem = (Status)iter.next();
     		if (statusItem.roomId != null){
-    			System.out.printf("%s\t%s\n", statusItem.roomId, statusItem.name);
+    			response = response + statusItem.roomId + "\t" + statusItem.name + "\n";
     		}
     	}
+    	Global.outputLock.lock();
+    	ResponseUtil.response(request.id, response);
+    	Global.outputLock.unlock();
 		
 	}
 	

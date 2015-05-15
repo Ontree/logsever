@@ -1,19 +1,20 @@
 package edu.thu.ss.logserver.processor;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import edu.thu.ss.logserver.processor.ReadStatusProcessor.Status;
+import edu.thu.ss.logserver.Global;
 import edu.thu.ss.logserver.request.ReadEmployeeRequest;
 import edu.thu.ss.logserver.request.Request;
+import edu.thu.ss.logserver.request.util.ResponseUtil;
 
 public class ReadEmployeeProcessor extends ReadProcessor {
 	String name;
+	Request request;
 	public ReadEmployeeProcessor(Request request) {
 		super(request);
+		this.request = request;
 		name = ((ReadEmployeeRequest)request).name;
 		// TODO Auto-generated constructor stub
 	}
@@ -26,6 +27,7 @@ public class ReadEmployeeProcessor extends ReadProcessor {
 		String roomId;
 		int flag;
 		
+		logFile.startRead();
 		//read lines of logFile
         while ((logItem=readLine())!=null) { 
         	if (!logItem.name.equals(name)){
@@ -36,19 +38,25 @@ public class ReadEmployeeProcessor extends ReadProcessor {
         	}
         	roomSet.add(logItem.roomId);
         }
+        logFile.endRead();
+        Global.ThreadCount.decrementAndGet();
         
+        String response = "";
         iter = roomSet.iterator();
     	while(true){  
     		roomId = (String)iter.next();
-    		System.out.printf(roomId);
+    		response = response + (roomId);
     		if (iter.hasNext()){
-    			System.out.printf(",");
+    			response = response + ",";
     		}else{
-    			System.out.printf("\n");
+    			response = response + "\n";
     			break;
     		}
  
     	}
+    	Global.outputLock.lock();
+    	ResponseUtil.response(request.id, response);
+    	Global.outputLock.unlock();
 		
 	}
 	

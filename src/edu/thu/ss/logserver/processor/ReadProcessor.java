@@ -10,11 +10,11 @@ import edu.thu.ss.logserver.request.Request;
 import edu.thu.ss.logserver.request.util.LogFileReader;
 
 public abstract class ReadProcessor implements Runnable{
-	LogFileReader LogFile;
+	LogFileReader logFile;
 	public ReadProcessor(Request request){
 		try{
 			File file=new File(Global.LOG_FILE_PATH);	
-			LogFile = new LogFileReader(file);
+			logFile = new LogFileReader(file);
 		}catch(Exception e1){	
 		}
 		
@@ -25,7 +25,7 @@ public abstract class ReadProcessor implements Runnable{
 		String line="";
         String[] arrs=null;
         try {
-			line=LogFile.readLine();
+			line=logFile.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
