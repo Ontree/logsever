@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import edu.thu.ss.logserver.Global;
-import edu.thu.ss.logserver.processor.LogItem.Type;
 import edu.thu.ss.logserver.request.Request;
 import edu.thu.ss.logserver.request.util.LogFileReader;
 
@@ -35,7 +34,7 @@ public abstract class ReadProcessor implements Runnable{
             logItem.timestmp = Long.parseLong(arrs[0]);
             logItem.name = arrs[1];
             logItem.roomId = arrs[2];
-            logItem.type = LogItem.Type.valueOf(arrs[3]);
+            logItem.type = Global.Type.valueOf(arrs[3]);
             return logItem;
         }else{
         	return null;

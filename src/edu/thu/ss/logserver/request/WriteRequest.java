@@ -1,9 +1,8 @@
 package edu.thu.ss.logserver.request;
 
+import edu.thu.ss.logserver.Global.Type;
+
 public final class WriteRequest extends Request {
-	public enum Type {
-		Enter, Leave;
-	}
 
 	public long timestmp;
 	public String name;
@@ -26,5 +25,11 @@ public final class WriteRequest extends Request {
 	@Override
 	public boolean isWrite() {
 		return true;
+	}
+
+	@Override
+	public int readType() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

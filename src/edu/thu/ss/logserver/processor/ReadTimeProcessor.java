@@ -23,7 +23,7 @@ public class ReadTimeProcessor extends ReadProcessor {
         while ((logItem=readLine())!=null) { 
         	if (logItem.name.equals(request.name)
         			&&logItem.roomId.equals(request.roomId)){
-        		if (logItem.type.equals(LogItem.Type.valueOf("Leave"))){
+        		if (logItem.type.equals(Global.Type.valueOf("Leave"))){
         			if (enterTime == -1){
         				System.out.printf("error:enterTime == -1\n");
         			}else{

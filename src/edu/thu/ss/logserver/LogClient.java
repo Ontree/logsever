@@ -6,13 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 
-import edu.thu.ss.logserver.request.ReadEmployeeRequest;
-import edu.thu.ss.logserver.request.ReadIntervalRequest;
-import edu.thu.ss.logserver.request.ReadStatusRequest;
-import edu.thu.ss.logserver.request.ReadTimeRequest;
-import edu.thu.ss.logserver.request.Request;
-import edu.thu.ss.logserver.request.WriteRequest;
-import edu.thu.ss.logserver.request.WriteRequest.Type;
+import edu.thu.ss.logserver.Global.Type;
+import edu.thu.ss.logserver.request.*;
 
 public class LogClient implements Runnable {
 
@@ -73,8 +68,8 @@ public class LogClient implements Runnable {
 							line = br.readLine();
 							continue;
 						}
-						String EmployName = requestSplit[2];
-						request = new ReadEmployeeRequest();
+						String EmployeeName = requestSplit[2];
+						request = new ReadEmployeeRequest(EmployeeName);
 						queue.add(request);
 					}else if (requestSplit[1].equals("interval")){
 						if (requestSplit.length != 4){
@@ -82,16 +77,16 @@ public class LogClient implements Runnable {
 							line = br.readLine();
 							continue;
 						}
-						long LowTime, HighTime;
+						long low, up;
 						try{
-							LowTime = Long.valueOf(requestSplit[2]).longValue();
-							HighTime = Long.valueOf(requestSplit[3]).longValue();
+							low = Long.valueOf(requestSplit[2]).longValue();
+							up = Long.valueOf(requestSplit[3]).longValue();
 						}catch (Exception e){
 							System.out.println("error");
 							line = br.readLine();
 							continue;
 						}
-						request = new ReadIntervalRequest();
+						request = new ReadIntervalRequest(low, up);
 						queue.add(request);
 					}else if (requestSplit[1].equals("status")){
 						if (requestSplit.length != 2){
@@ -109,7 +104,7 @@ public class LogClient implements Runnable {
 						}
 						String EmployeeName = requestSplit[2];
 						String RoomId = requestSplit[3];
-						request = new ReadTimeRequest();
+						request = new ReadTimeRequest(EmployeeName, RoomId);
 						queue.add(request);
 					}else{
 						System.out.println("error");

@@ -33,7 +33,7 @@ public class ReadEmployeeProcessor extends ReadProcessor {
         	if (!logItem.name.equals(name)){
         		continue;
         	}
-        	if (logItem.type.equals(LogItem.Type.valueOf("Leave"))){
+        	if (logItem.type.equals(Global.Type.valueOf("Leave"))){
         		continue;
         	}
         	roomSet.add(logItem.roomId);
