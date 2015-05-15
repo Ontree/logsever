@@ -5,13 +5,12 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Global {
-	static String LogFileName;
 	
 	public static enum Type {
 		Enter, Leave;
 	}
 	
-	public static String LOG_FILE_PATH;
+	public final static String LOG_FILE_PATH = "log.txt";
 	public final static int EMPLOYEE = 1;
 	public final static int INTERVAL = 2;
 	public final static int STATUS = 3;
