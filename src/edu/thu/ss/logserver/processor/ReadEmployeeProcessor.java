@@ -25,7 +25,6 @@ public class ReadEmployeeProcessor extends ReadProcessor {
 		Iterator<String> iter; 
 		LogItem logItem;
 		String roomId;
-		int flag;
 		
 		logFile.startRead();
 		//read lines of logFile
@@ -43,16 +42,19 @@ public class ReadEmployeeProcessor extends ReadProcessor {
         
         String response = "";
         iter = roomSet.iterator();
-    	while(true){  
-    		roomId = (String)iter.next();
-    		response = response + (roomId);
-    		if (iter.hasNext()){
-    			response = response + ",";
-    		}else{
-    			break;
-    		}
- 
-    	}
+        
+        if (iter.hasNext()){
+	    	while(true){  
+	    		roomId = (String)iter.next();
+	    		response = response + (roomId);
+	    		if (iter.hasNext()){
+	    			response = response + ",";
+	    		}else{
+	    			break;
+	    		}
+	 
+	    	}
+        }
     	Global.outputLock.lock();
     	ResponseUtil.response(request.id, response);
     	Global.outputLock.unlock();
