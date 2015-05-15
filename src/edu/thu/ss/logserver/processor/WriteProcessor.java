@@ -7,7 +7,6 @@ import edu.thu.ss.logserver.Global;
 import edu.thu.ss.logserver.Global.Type;
 import edu.thu.ss.logserver.request.Request;
 import edu.thu.ss.logserver.request.WriteRequest;
-import edu.thu.ss.logserver.request.util.LogFileReader;
 import edu.thu.ss.logserver.request.util.LogFileWriter;
 
 public class WriteProcessor extends ReadProcessor{

@@ -23,7 +23,7 @@ public class LogServer {
 			try {
 				Request request = queue.take();
 				//process request
-				if (request.isRead()){
+				if (request.isRead()){//readRequest
 					Global.ThreadCount.incrementAndGet();
 					switch (request.readType()){
 					case Global.EMPLOYEE:
@@ -47,7 +47,6 @@ public class LogServer {
 					new WriteProcessor(request);
 					
 				}
-				ReadEmployeeProcessor processor = new ReadEmployeeProcessor(request);
 				
 			} catch (InterruptedException e) {
 				e.printStackTrace();

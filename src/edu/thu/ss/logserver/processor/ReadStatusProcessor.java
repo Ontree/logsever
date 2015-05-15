@@ -62,10 +62,15 @@ public class ReadStatusProcessor extends ReadProcessor {
         
         String response = "";
         iter = statusList.iterator();
-    	while(iter.hasNext()){  
+    	while(true){  
     		statusItem = (Status)iter.next();
     		if (statusItem.roomId != null){
-    			response = response + statusItem.roomId + "\t" + statusItem.name + "\n";
+    			response = response + statusItem.roomId + "\t" + statusItem.name;
+    		}
+    		if(iter.hasNext()){
+    			response = response + "\n";
+    		}else{
+    			break;
     		}
     	}
     	Global.outputLock.lock();
