@@ -49,7 +49,6 @@ public class ReadEmployeeProcessor extends ReadProcessor {
     		if (iter.hasNext()){
     			response = response + ",";
     		}else{
-    			response = response + "\n";
     			break;
     		}
  
