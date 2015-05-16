@@ -43,9 +43,7 @@ public class ReadTimeProcessor extends ReadProcessor {
         Global.ThreadCount.decrementAndGet();
         
         String response = "" + totalTime;
-        Global.outputLock.lock();
-        ResponseUtil.response(request.id, response);
-        Global.outputLock.unlock();
+        Global.response(request.id, response);
     	
     		
 		

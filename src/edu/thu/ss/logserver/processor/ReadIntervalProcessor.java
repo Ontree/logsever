@@ -33,9 +33,7 @@ public class ReadIntervalProcessor extends ReadProcessor {
         logFile.endRead();
         
         Global.ThreadCount.decrementAndGet();
-        Global.outputLock.lock();
-        ResponseUtil.response(request.id, response);
-        Global.outputLock.unlock();
+        Global.response(request.id, response);
 	}
 	
 }

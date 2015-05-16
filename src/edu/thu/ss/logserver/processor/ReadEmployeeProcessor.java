@@ -55,9 +55,8 @@ public class ReadEmployeeProcessor extends ReadProcessor {
 	 
 	    	}
         }
-    	Global.outputLock.lock();
-    	ResponseUtil.response(request.id, response);
-    	Global.outputLock.unlock();
+        
+        Global.response(request.id, response);
 		
 	}
 	

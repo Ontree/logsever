@@ -1,10 +1,6 @@
-write 1 chenminghai room1 enter
-write 9 chenminghai 1 enter
-write 10 chenminghai room1 leave
-write 15 zanghaofeng room2 enter
 read status
 read employee chenminghai
 read employee
 read time chenminghai 1
 read interval 2000 5678
-write 10 chenminghai room3 enter
+
