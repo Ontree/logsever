@@ -37,7 +37,7 @@ public class WriteProcessor extends ReadProcessor{
 		logFileWriter.println(OutputContent);
 		logFileWriter.flush();
         Global.response(request.id, "write successfully");
-        Global.blockLock.unlock();
+        Global.Block.decrementAndGet();
 		logFileWriter.endWrite();
 		logFileWriter.close();
 	}
@@ -49,14 +49,14 @@ public class WriteProcessor extends ReadProcessor{
 				WriteLogItem();
 			else{
 				Global.response(request.id, "error");
-		        Global.blockLock.unlock();
+				Global.Block.decrementAndGet();
 			}
 			return;
 		}
 		
 		if (lastEmployeeItem.timestmp >= request.timestmp){
 	        Global.response(request.id, "error");
-	        Global.blockLock.unlock();
+	        Global.Block.decrementAndGet();
 			return;
 		}
 		if (lastEmployeeItem.type == Type.Enter 
@@ -68,7 +68,7 @@ public class WriteProcessor extends ReadProcessor{
 			WriteLogItem();	
 		}else{
 			Global.response(request.id, "error");
-	        Global.blockLock.unlock();
+			Global.Block.decrementAndGet();
 			return;
 		}
 	}

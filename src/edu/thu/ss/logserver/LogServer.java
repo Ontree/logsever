@@ -46,23 +46,25 @@ public class LogServer {
 						break;
 					}
 				}else{ //writeRequest
-					/*
+					
 					Global.ThreadCount.incrementAndGet();
 					new Thread(new ReadLogProcessor(request)).start();
 
 					while(Global.ThreadCount.get() != 0){
 						Thread.sleep(50);
 					}
-					Global.blockLock.lock();
+					Global.Block.incrementAndGet();
 					new Thread(new WriteProcessor(request)).start();
-					Global.blockLock.lock();
-					Global.blockLock.unlock();
-					*/
+					while(Global.Block.get()!=0){
+						Thread.sleep(50);
+					}
+					
+					/*
 					while(Global.ThreadCount.get() != 0){
 						Thread.sleep(50);
 					}
 					new WriteProcessor(request);
-					
+					*/
 				}
 				
 			} catch (InterruptedException e) {

@@ -26,6 +26,6 @@ public class Global {
 	public static AtomicInteger ThreadCount = new AtomicInteger(0); 
 	public final static String REQUEST_FILE_NAME = "Requests.txt";
 	public static Lock outputLock = new ReentrantLock();
-	public static Lock blockLock = new ReentrantLock();
+	public static AtomicInteger Block = new AtomicInteger(0); 
 	public static LogItem lastLogItem = null;
 }
