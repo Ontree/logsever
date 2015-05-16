@@ -21,14 +21,14 @@ public class ReadIntervalProcessor extends ReadProcessor {
 		logFile.startRead();
 		//read lines of logFile
         while ((logItem=readLine())!=null) { 
+        	if (!(logItem.timestmp >= request.low && logItem.timestmp <=request.up)){
+        		continue;
+        	}
         	if (!response.equals("")){
         		response = response + "\n";
         	}
-        	if (logItem.timestmp >= request.low && logItem.timestmp <=request.up){
-        		response = response + logItem.type.toString() + "\t" + 
+        	response = response + logItem.type.toString() + "\t" + 
         				logItem.name + "\t" + logItem.roomId; 
-       
-        	}
         }
         logFile.endRead();
         

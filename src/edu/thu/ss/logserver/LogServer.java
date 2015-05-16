@@ -4,6 +4,7 @@ import java.util.concurrent.BlockingQueue;
 
 import edu.thu.ss.logserver.processor.ReadEmployeeProcessor;
 import edu.thu.ss.logserver.processor.ReadIntervalProcessor;
+import edu.thu.ss.logserver.processor.ReadLogProcessor;
 import edu.thu.ss.logserver.processor.ReadProcessor;
 import edu.thu.ss.logserver.processor.ReadStatusProcessor;
 import edu.thu.ss.logserver.processor.ReadTimeProcessor;
@@ -45,11 +46,19 @@ public class LogServer {
 						break;
 					}
 				}else{ //writeRequest
+					Global.ThreadCount.incrementAndGet();
+					new Thread(new ReadLogProcessor(request)).start();
+					
+					
+					
 					while(Global.ThreadCount.get() != 0){
 						Thread.sleep(50);
 					}
-					//Global.ThreadCount.incrementAndGet();
-					new WriteProcessor(request);
+					
+					Global.blockLock.lock();
+					new Thread(new WriteProcessor(request)).start();
+					Global.blockLock.lock();
+					Global.blockLock.unlock();
 					
 				}
 				
