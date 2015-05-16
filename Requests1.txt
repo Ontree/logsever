@@ -1,0 +1,24 @@
+write 0 s1 r1 enter
+write 3 s1 r1 leave
+write 7 s1 r1 enter
+write 9 s1 r1 leave
+write 10 s1 r2 enter
+read employee
+write 6 s4 r4 enter
+write 2 s2 r1 enter
+write 1 s3 r2 enter
+write 5 s2 r1 leave
+write 7 s2 r3 enter
+write 12 s1 r3 leave
+write 11 s1 r2 leave
+write 11 s1 r4 enter
+write 12 s1 r4 enter
+read status
+read employee s1
+read employee s2
+read employee s3
+read time s1 r2
+write 8 s4 r3 leave
+read employee s
+read interval 0 7
+read time s1 r2

@@ -1,0 +1,15 @@
+write 1 s1 r1 enter
+read status
+write 1 s2 r1 leave
+write 5 s1 r1 leave
+write 4 s1 r2 enter
+write 6 s1 r3 enter
+write 7 s1 r4 enter
+write 8 s1 r4 leave
+write 8 s1 r3 leave
+write 9 s1 r1 enter
+read status
+write 13 s1 r1 leave
+read status
+read time s1 r1
+write 15 s1 r1 enter

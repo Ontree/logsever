@@ -1,0 +1,88 @@
+Response for:1
+error
+Response for:2
+
+Response for:3
+write successfully
+Response for:4
+write successfully
+Response for:5
+r1	s1
+r1	s2
+Response for:6
+error
+Response for:7
+write successfully
+Response for:8
+1
+Response for:9
+0
+Response for:10
+write successfully
+Response for:11
+write successfully
+Response for:12
+4
+Response for:13
+error
+Response for:14
+write successfully
+Response for:15
+error
+Response for:16
+write successfully
+Response for:17
+write successfully
+Response for:18
+Enter	s1	r1
+Enter	s2	r1
+Leave	s1	r1
+Enter	s1	r2
+Leave	s2	r1
+Leave	s1	r2
+Enter	s1	r3
+Leave	s1	r3
+Response for:19
+r1,r2,r3
+Response for:20
+write successfully
+Response for:21
+write successfully
+Response for:22
+write successfully
+Response for:23
+r1	s3
+r2	s4
+r3	s5
+Response for:24
+write successfully
+Response for:27
+error
+Response for:28
+error
+Response for:29
+error
+Response for:26
+Enter	s1	r1
+Enter	s2	r1
+Leave	s1	r1
+Enter	s1	r2
+Leave	s2	r1
+Leave	s1	r2
+Enter	s1	r3
+Leave	s1	r3
+Enter	s3	r1
+Enter	s4	r2
+Enter	s5	r3
+Leave	s3	r1
+Response for:25
+r2	s4
+r3	s5
+Response for:30
+error
+Response for:31
+error
+Response for:32
+error
+Response for:33
+error
