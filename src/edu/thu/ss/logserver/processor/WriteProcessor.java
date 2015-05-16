@@ -25,7 +25,6 @@ public class WriteProcessor extends ReadProcessor{
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		runWrite();
 	}
 	
 	public void WriteLogItem(){
@@ -34,39 +33,30 @@ public class WriteProcessor extends ReadProcessor{
 		OutputContent += request.timestmp + ",";
 		OutputContent += request.name + ",";
 		OutputContent += request.roomId + ",";
-		OutputContent += (request.type == Type.Enter)?"Enter":"Leave";
+		OutputContent += (request.type == Type.Enter)?"enter":"leave";
 		logFileWriter.println(OutputContent);
 		logFileWriter.flush();
-		Global.outputLock.lock();
-        ResponseUtil.response(request.id, "write successfully");
-        Global.outputLock.unlock();
+        Global.response(request.id, "write successfully");
+        Global.blockLock.unlock();
 		logFileWriter.endWrite();
 		logFileWriter.close();
 	}
 	
-	public void runWrite(){
-		LogItem logItem;
-		LogItem lastEmployeeItem = null;
-		logFile.startRead();
-		while ((logItem=readLine())!=null) {
-			if (logItem.name.equals(request.name)){
-				lastEmployeeItem = logItem;
-			}
-		}
+	public void run(){
+		LogItem lastEmployeeItem = Global.lastLogItem;
 		if (lastEmployeeItem == null){
 			if (request.type == Type.Enter)
 				WriteLogItem();
 			else{
-				Global.outputLock.lock();
-				ResponseUtil.response(request.id, "error");
-				Global.outputLock.unlock();
+				Global.response(request.id, "error");
+		        Global.blockLock.unlock();
 			}
 			return;
 		}
+		
 		if (lastEmployeeItem.timestmp >= request.timestmp){
-			Global.outputLock.lock();
-	        ResponseUtil.response(request.id, "error");
-	        Global.outputLock.unlock();
+	        Global.response(request.id, "error");
+	        Global.blockLock.unlock();
 			return;
 		}
 		if (lastEmployeeItem.type == Type.Enter 
@@ -77,15 +67,9 @@ public class WriteProcessor extends ReadProcessor{
 				&& request.type == Type.Enter ){
 			WriteLogItem();	
 		}else{
-			Global.outputLock.lock();
-	        ResponseUtil.response(request.id, "error");
-	        Global.outputLock.unlock();
+			Global.response(request.id, "error");
+	        Global.blockLock.unlock();
+			return;
 		}
-	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
 	}
 }
