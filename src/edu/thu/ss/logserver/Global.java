@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import edu.thu.ss.logserver.processor.LogItem;
 import edu.thu.ss.logserver.request.util.ResponseUtil;
 
 public class Global {
@@ -26,4 +27,5 @@ public class Global {
 	public final static String REQUEST_FILE_NAME = "Requests.txt";
 	public static Lock outputLock = new ReentrantLock();
 	public static Lock blockLock = new ReentrantLock();
+	public static LogItem lastLogItem = null;
 }
