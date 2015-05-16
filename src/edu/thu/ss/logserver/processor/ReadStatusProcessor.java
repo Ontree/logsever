@@ -69,7 +69,9 @@ public class ReadStatusProcessor extends ReadProcessor {
 	    			response = response + statusItem.roomId + "\t" + statusItem.name;
 	    		}
 	    		if(iter.hasNext()){
-	    			response = response + "\n";
+	    			if (statusItem.roomId != null){
+	    				response = response + "\n";
+	    			}
 	    		}else{
 	    			break;
 	    		}

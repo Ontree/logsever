@@ -27,6 +27,10 @@ public class LogServer {
 				if (request.isRead()){//readRequest
 					Global.ThreadCount.incrementAndGet();
 					switch (request.readType()){
+					case Global.ERROR:
+						Global.ThreadCount.decrementAndGet();
+						Global.response(request.id, "error");
+						break;
 					case Global.EMPLOYEE:
 						new Thread(new ReadEmployeeProcessor(request)).start();
 						break;
@@ -39,16 +43,12 @@ public class LogServer {
 					case Global.TIME:
 						new Thread(new ReadTimeProcessor(request)).start();
 						break;
-					default:
-						Global.outputLock.lock();
-				        ResponseUtil.response(request.id, "error");
-				        Global.outputLock.unlock();
 					}
 				}else{ //writeRequest
 					while(Global.ThreadCount.get() != 0){
 						Thread.sleep(50);
 					}
-					
+					//Global.ThreadCount.incrementAndGet();
 					new WriteProcessor(request);
 					
 				}

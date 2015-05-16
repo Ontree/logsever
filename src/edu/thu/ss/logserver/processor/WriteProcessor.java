@@ -34,7 +34,7 @@ public class WriteProcessor extends ReadProcessor{
 		OutputContent += request.timestmp + ",";
 		OutputContent += request.name + ",";
 		OutputContent += request.roomId + ",";
-		OutputContent += (request.type == Type.Enter)?"enter":"leave";
+		OutputContent += (request.type == Type.Enter)?"Enter":"Leave";
 		logFileWriter.println(OutputContent);
 		logFileWriter.flush();
 		Global.outputLock.lock();

@@ -1,1 +1,12 @@
-15,zanghaofeng,room2,Enter
+0,s1,r1,Enter
+3,s1,r1,Leave
+7,s1,r1,Enter
+6,s4,r4,Enter
+2,s2,r1,Enter
+1,s3,r2,Enter
+5,s2,r1,Leave
+7,s2,r3,Enter
+7,s4,r4,Leave
+9,s1,r1,Leave
+10,s1,r2,Enter
+11,s1,r2,Leave
