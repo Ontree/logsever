@@ -26,7 +26,8 @@ public class ReadLogProcessor extends ReadProcessor {
 		}
 		Global.lastLogItem = lastEmployeeItem;
 		Global.ThreadCount.decrementAndGet();
-		logFile.endRead();	
+		logFile.endRead();
+		
 	}
 	
 }

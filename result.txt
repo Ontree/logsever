@@ -13,7 +13,8 @@ error
 Response for:7
 write successfully
 Response for:8
-write successfully
+r2	s1
+r4	s4
 Response for:9
 write successfully
 Response for:10
@@ -21,31 +22,8 @@ write successfully
 Response for:11
 write successfully
 Response for:12
-error
-Response for:13
 write successfully
-Response for:14
-error
-Response for:15
-write successfully
-Response for:20
-1
 Response for:16
-r4	s1
-r4	s4
-r3	s2
-r2	s3
-Response for:19
-r2
-Response for:18
-r1,r3
-Response for:17
-r1,r2,r4
-Response for:21
-error
-Response for:22
-
-Response for:23
 Enter	s1	r1
 Leave	s1	r1
 Enter	s1	r1
@@ -54,5 +32,48 @@ Enter	s2	r1
 Enter	s3	r2
 Leave	s2	r1
 Enter	s2	r3
+Response for:15
+5
+Response for:14
+Leave	s1	r1
+Enter	s1	r2
+Response for:13
+r1,r2
+Response for:17
+error
+Response for:19
+5
+Response for:18
+r1,r3
+Response for:20
+write successfully
+Response for:21
+error
+Response for:22
+write successfully
+Response for:23
+r4	s1
+r4	s4
+r3	s2
+r2	s3
 Response for:24
+r1,r2,r4
+Response for:26
+r2
+Response for:25
+r1,r3
+Response for:27
+1
+Response for:28
+error
+Response for:29
+Enter	s1	r1
+Leave	s1	r1
+Enter	s1	r1
+Enter	s4	r4
+Enter	s2	r1
+Enter	s3	r2
+Leave	s2	r1
+Enter	s2	r3
+Response for:30
 1

@@ -39,8 +39,9 @@ public class ReadTimeProcessor extends ReadProcessor {
         		}
         	}
         }
-        logFile.endRead();
+        
         Global.ThreadCount.decrementAndGet();
+        logFile.endRead();
         
         String response = "" + totalTime;
         Global.response(request.id, response);

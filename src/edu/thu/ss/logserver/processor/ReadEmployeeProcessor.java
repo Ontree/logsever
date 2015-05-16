@@ -37,9 +37,9 @@ public class ReadEmployeeProcessor extends ReadProcessor {
         	}
         	roomSet.add(logItem.roomId);
         }
-        logFile.endRead();
-        Global.ThreadCount.decrementAndGet();
         
+        Global.ThreadCount.decrementAndGet();
+        logFile.endRead();
         
         String response = "";
         iter = roomSet.iterator();

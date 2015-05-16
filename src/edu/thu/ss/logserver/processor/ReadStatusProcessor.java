@@ -57,8 +57,9 @@ public class ReadStatusProcessor extends ReadProcessor {
         		statusList.add(new Status(logItem.name, logItem.roomId));
         	}
         }
-        logFile.endRead();
+        
         Global.ThreadCount.decrementAndGet();
+        logFile.endRead();
         
         String response = "";
         iter = statusList.iterator();

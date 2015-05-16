@@ -30,9 +30,10 @@ public class ReadIntervalProcessor extends ReadProcessor {
         	response = response + logItem.type.toString() + "\t" + 
         				logItem.name + "\t" + logItem.roomId; 
         }
-        logFile.endRead();
+        
         
         Global.ThreadCount.decrementAndGet();
+        logFile.endRead();
         Global.response(request.id, response);
 	}
 	
