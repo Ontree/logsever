@@ -40,6 +40,7 @@ public class ReadEmployeeProcessor extends ReadProcessor {
         logFile.endRead();
         Global.ThreadCount.decrementAndGet();
         
+        
         String response = "";
         iter = roomSet.iterator();
         
