@@ -28,4 +28,5 @@ public class Global {
 	public static Lock outputLock = new ReentrantLock();
 	public static AtomicInteger Block = new AtomicInteger(0); 
 	public static LogItem lastLogItem = null;
+	public final static int  MAX_THREAD_NUMBER = 50;
 }

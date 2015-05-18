@@ -58,8 +58,9 @@ public class ReadStatusProcessor extends ReadProcessor {
         	}
         }
         
-        Global.ThreadCount.decrementAndGet();
         logFile.endRead();
+        Global.ThreadCount.decrementAndGet();
+        
         
         String response = "";
         iter = statusList.iterator();

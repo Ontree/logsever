@@ -37,8 +37,8 @@ public class WriteProcessor extends ReadProcessor{
 		logFileWriter.println(OutputContent);
 		logFileWriter.flush();
         Global.response(request.id, "write successfully");
+        logFileWriter.endWrite();
         Global.Block.decrementAndGet();
-		logFileWriter.endWrite();
 		logFileWriter.close();
 	}
 	

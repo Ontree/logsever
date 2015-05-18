@@ -95,6 +95,9 @@ public class LogServer {
 				
 				//process request
 				if (request.isRead()){//readRequest
+					while(Global.ThreadCount.get() > Global.MAX_THREAD_NUMBER){
+						Thread.sleep(50);
+					}
 					startReadRequest(request);
 				}else{ //writeRequest
 					
@@ -108,6 +111,9 @@ public class LogServer {
 						Request request2 = queue.take();
 						if (request2.isRead()){//readRequest
 							if (!conflict(request,request2)){
+								while(Global.ThreadCount.get() > Global.MAX_THREAD_NUMBER){
+									Thread.sleep(50);
+								}
 								startReadRequest(request2);
 							}else{
 								requestBlock = request2;
