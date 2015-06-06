@@ -27,6 +27,7 @@ public class Global {
 	public final static String REQUEST_FILE_NAME = "Requests.txt";
 	public static Lock outputLock = new ReentrantLock();
 	public static AtomicInteger Block = new AtomicInteger(0); 
+	public static AtomicInteger Starve = new AtomicInteger(0); 
 	public static LogItem lastLogItem = null;
 	public final static int  MAX_THREAD_NUMBER = 50;
 }

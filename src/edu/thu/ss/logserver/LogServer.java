@@ -110,17 +110,20 @@ public class LogServer {
 						}
 						Request request2 = queue.take();
 						if (request2.isRead()){//readRequest
-							if (!conflict(request,request2)){
+							if (!conflict(request,request2) && Global.Starve.get() < 100){
 								while(Global.ThreadCount.get() > Global.MAX_THREAD_NUMBER){
 									Thread.sleep(50);
 								}
 								startReadRequest(request2);
+								Global.Starve.incrementAndGet();
 							}else{
 								requestBlock = request2;
+								Global.Starve.set(0);
 								break;
 							}
 						}else{
 							requestBlock = request2;
+							Global.Starve.set(0);
 							break;
 						}	
 					}
